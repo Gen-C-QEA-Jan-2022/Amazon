@@ -26,8 +26,9 @@ public class AmazonCartPage{
         //return driver.findElement(By.xpath("//h2[contains(text(), 'Your Amazon Cart is empty')]")); 
     }
 
-    public WebElement getDeleteMessage(){
-        return driver.findElement(By.xpath("//span[contains(text(), 'was removed from Shopping Cart.')]/a"));
+    public void getDeleteMessage(){
+        String url = driver.findElement(By.xpath("//span[contains(text(), 'was removed from Shopping Cart.')]/a")).getAttribute("href");
+        driver.get(url);
     }
 
     public void quit(){
