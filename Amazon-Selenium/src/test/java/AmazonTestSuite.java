@@ -47,7 +47,7 @@ public class AmazonTestSuite {
         driver.findElement(By.id("nav-cart")).click();
 
         amazonCartPage = new AmazonCartPage(driver);
-        // Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.62");
+        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.62");
 
         amazonCartPage.getDelete().click();
         Assert.assertEquals(amazonCartPage.getEmptyCart().getText(), "Your Amazon Cart is empty.");
