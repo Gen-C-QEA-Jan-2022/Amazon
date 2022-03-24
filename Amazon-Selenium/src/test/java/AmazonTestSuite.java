@@ -17,6 +17,7 @@ public class AmazonTestSuite {
     private WebDriver driver;
     private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
     private String isbn = "978-1680502381";
+    private String bookURL = "/Cucumber-Book-Behaviour-Driven-Development-Developers-dp-1680502387/dp/1680502387/";
 
     @BeforeTest
     public void setup() {
@@ -42,17 +43,20 @@ public class AmazonTestSuite {
     @Test(dependsOnMethods = "searchResults")
     public void cart() {
         amazonProductPage = new AmazonProductPage(driver);
+        Assert.assertEquals(amazonProductPage.getPaperBack(bookURL).getAttribute("aria-selected"), "true");
+
         amazonProductPage.getAddToCartButton().click();
         Assert.assertEquals(amazonProductPage.getCartQty().getText(), "1");
         driver.findElement(By.id("nav-cart")).click();
 
         amazonCartPage = new AmazonCartPage(driver);
-        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.62");
+        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$39.54");
 
         amazonCartPage.getDelete().click();
         Assert.assertEquals(amazonCartPage.getEmptyCart().getText(), "Your Amazon Cart is empty.");
         
-        amazonCartPage.getDeleteMessage().click();
+        amazonCartPage.getDeleteMessage();
+        amazonProductPage.setDriver(driver);
         Assert.assertEquals(amazonProductPage.getISBN(), isbn);
     }
 
