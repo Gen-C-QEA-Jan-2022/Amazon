@@ -11,6 +11,7 @@ import java.time.Duration;
 
 public class AmazonTestSuite {
     private AmazonHomePage amazonHomePage;
+    private AmazonProductPage amazonProductPage;
     private AmazonCartPage amazonCartPage;
     private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
@@ -39,7 +40,9 @@ public class AmazonTestSuite {
 
     @Test(dependsOnMethods = "searchResults")
     public void cart() {
-        driver.findElement(By.id("add-to-cart-button")).click();
+        amazonProductPage = new AmazonProductPage(driver);
+        amazonProductPage.getAddToCartButton().click();
+        Assert.assertEquals(amazonProductPage.getCartQty().getText(), "1");
         driver.findElement(By.id("nav-cart")).click();
 
         amazonCartPage = new AmazonCartPage(driver);

@@ -19,17 +19,21 @@ public class AmazonProductPage {
         return paperBack;
     }
 
-        public WebElement getBuyNowButton () {
-            WebElement buyNow = driver.findElement(By.id("buy-now-button"));
-            //buyNow.click();
-            return buyNow;
-        }
+    public WebElement getBuyNowButton () {
+        WebElement buyNow = driver.findElement(By.id("buy-now-button"));
+        //buyNow.click();
+        return buyNow;
+    }
 
 
     public WebElement getAddToCartButton () {
         WebElement addToCart = driver.findElement(By.id("add-to-cart-button"));
         //addToCart.click();
         return addToCart;
+    }
+
+    public WebElement getCartQty(){
+        return driver.findElement(By.id("nav-cart-count"));
     }
 
     public String getISBN() {
