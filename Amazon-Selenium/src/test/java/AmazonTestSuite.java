@@ -50,6 +50,9 @@ public class AmazonTestSuite {
 
         amazonCartPage.getDelete().click();
         Assert.assertEquals(amazonCartPage.getEmptyCart().getText(), "Your Amazon Cart is empty.");
+        
+        amazonCartPage.getDeleteMessage().click();
+        Assert.assertEquals(amazonProductPage.getISBN(),"978-1680502381");
     }
 
     @AfterTest
