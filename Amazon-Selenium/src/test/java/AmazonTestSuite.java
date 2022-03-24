@@ -12,7 +12,7 @@ import java.time.Duration;
 public class AmazonTestSuite {
     private AmazonHomePage amazonHomePage;
     private AmazonCartPage amazonCartPage;
-    private AmazonProductPage amazonProductPage;
+    private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
     private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
 
@@ -28,6 +28,13 @@ public class AmazonTestSuite {
         amazonHomePage = new AmazonHomePage(driver);
         amazonHomePage.useSearchBox("Cucumber Testing");
         Assert.assertTrue(driver.getPageSource().contains(book));
+    }
+
+    @Test
+    public void getBook(){
+        amazonSearchResultPage = new AmazonSearchResultPage(driver);
+        amazonSearchResultPage.clickImage();
+        Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), " The Cucumber Book: Behaviour-Driven Development for Testers and Developers ");
     }
 
     @Test(dependsOnMethods = "search")
