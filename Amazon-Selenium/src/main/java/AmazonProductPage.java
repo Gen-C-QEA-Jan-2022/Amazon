@@ -37,7 +37,7 @@ public class AmazonProductPage {
     }
 
     public String getISBN() {
-        String isbn13 = driver.findElement(By.id("//*[@id='isbn_feature_div']/div/div[1]/span[2]")).getText();
+        String isbn13 = driver.findElement(By.xpath("//*[@id='isbn_feature_div']/div/div[1]/span[2]")).getText();
         return isbn13;
     }
 
