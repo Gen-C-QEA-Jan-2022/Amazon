@@ -12,6 +12,7 @@ import java.time.Duration;
 public class AmazonTestSuite {
     private AmazonHomePage amazonHomePage;
     private AmazonCartPage amazonCartPage;
+    private AmazonProductPage amazonProductPage;
     private WebDriver driver;
     private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
 
