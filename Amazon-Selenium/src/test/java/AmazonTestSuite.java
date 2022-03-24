@@ -16,6 +16,7 @@ public class AmazonTestSuite {
     private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
     private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
+    private String isbn = "978-1680502381";
 
     @BeforeTest
     public void setup() {
@@ -52,7 +53,7 @@ public class AmazonTestSuite {
         Assert.assertEquals(amazonCartPage.getEmptyCart().getText(), "Your Amazon Cart is empty.");
         
         amazonCartPage.getDeleteMessage().click();
-        Assert.assertEquals(amazonProductPage.getISBN(),"978-1680502381");
+        Assert.assertEquals(amazonProductPage.getISBN(), isbn);
     }
 
     @AfterTest
