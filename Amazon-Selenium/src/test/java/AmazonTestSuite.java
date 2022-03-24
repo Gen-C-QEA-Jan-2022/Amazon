@@ -30,20 +30,18 @@ public class AmazonTestSuite {
         Assert.assertTrue(driver.getPageSource().contains(book));
     }
 
-    @Test
-    public void getBook(){
+    @Test(dependsOnMethods = "search")
+    public void searchResults(){
         amazonSearchResultPage = new AmazonSearchResultPage(driver);
         amazonSearchResultPage.clickImage();
-        Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), " The Cucumber Book: Behaviour-Driven Development for Testers and Developers ");
+        Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), book);
     }
 
-    @Test(dependsOnMethods = "search")
+    @Test(dependsOnMethods = "searchResults")
     public void cart() {
-        // Temporary usage to get to cart window.
-        driver.findElement(By.cssSelector("img[alt='" + book + "']")).click();
         driver.findElement(By.id("add-to-cart-button")).click();
         driver.findElement(By.id("nav-cart")).click();
-        
+
         amazonCartPage = new AmazonCartPage(driver);
         Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.62");
 
