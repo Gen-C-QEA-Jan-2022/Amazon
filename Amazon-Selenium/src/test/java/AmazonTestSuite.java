@@ -1,7 +1,6 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -9,12 +8,17 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
+import pages.*;
+
 public class AmazonTestSuite {
     private AmazonHomePage amazonHomePage;
     private AmazonProductPage amazonProductPage;
     private AmazonCartPage amazonCartPage;
     private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
+
+    // Specific product variables:
+    private String searchItem = "Cucumber Testing";
     private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
     private String isbn = "978-1680502381";
     private String bookURL = "/Cucumber-Book-Behaviour-Driven-Development-Developers-dp-1680502387/dp/1680502387/";
@@ -27,35 +31,48 @@ public class AmazonTestSuite {
     }
 
     @Test
-    public void search() {
+    public void amazon_Search_Function_Retrieves_Correct_Product() {
         amazonHomePage = new AmazonHomePage(driver);
-        amazonHomePage.useSearchBox("Cucumber Testing");
+        amazonHomePage.useSearchBox(searchItem);
         Assert.assertTrue(driver.getPageSource().contains(book));
     }
 
-    @Test(dependsOnMethods = "search")
-    public void searchResults(){
+    @Test(dependsOnMethods = "amazon_Search_Function_Retrieves_Correct_Product")
+    public void amazon_Search_Results_Provide_Correct_Product_Page() {
         amazonSearchResultPage = new AmazonSearchResultPage(driver);
         amazonSearchResultPage.clickImage();
         Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), book);
     }
 
-    @Test(dependsOnMethods = "searchResults")
-    public void cart() {
+    @Test(dependsOnMethods = "amazon_Search_Results_Provide_Correct_Product_Page")
+    public void amazon_Product_Page_Lands_On_Paperback_Tab() {
         amazonProductPage = new AmazonProductPage(driver);
-        Assert.assertEquals(amazonProductPage.getPaperBack(bookURL).getAttribute("aria-selected"), "true");
+        Assert.assertEquals(amazonProductPage.checkPaperBackTab(bookURL), "true");
+    }
 
+    @Test(dependsOnMethods = "amazon_Product_Page_Lands_On_Paperback_Tab")
+    public void amazon_Product_Page_AddToCart_Displays_Correct_Amount() {
         amazonProductPage.getAddToCartButton().click();
         Assert.assertEquals(amazonProductPage.getCartQty().getText(), "1");
-        driver.findElement(By.id("nav-cart")).click();
+    }
+
+    @Test(dependsOnMethods = "amazon_Product_Page_AddToCart_Displays_Correct_Amount")
+    public void amazon_Cart_Page_Contains_Correct_Product_Information() {
+        amazonProductPage.getCart().click();
 
         amazonCartPage = new AmazonCartPage(driver);
-        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$39.54");
+        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.56");
+    }
 
+    @Test(dependsOnMethods = "amazon_Cart_Page_Contains_Correct_Product_Information")
+    public void amazon_Cart_Page_Delete_Provide_Confirmation_Link() {
         amazonCartPage.getDelete().click();
         Assert.assertEquals(amazonCartPage.getEmptyCart().getText(), "Your Amazon Cart is empty.");
-        
-        amazonCartPage.getDeleteMessage();
+    }
+
+    @Test(dependsOnMethods = "amazon_Cart_Page_Delete_Provide_Confirmation_Link")
+    public void amazon_Cart_Page_Deletion_Link_Provides_Correct_Product_Page() {
+        driver.get(amazonCartPage.getDeleteMessageURL());
         amazonProductPage.setDriver(driver);
         Assert.assertEquals(amazonProductPage.getISBN(), isbn);
     }
