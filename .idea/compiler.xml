@@ -9,9 +9,8 @@
         <module name="Selenium-Amazon-Tests" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Selenium-Amazon-Tests" target="11" />
-      <module name="Selenium-Shopify-Tests" target="11" />
+    <bytecodeTargetLevel target="17">
+      <module name="Selenium-Amazon-Tests" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
