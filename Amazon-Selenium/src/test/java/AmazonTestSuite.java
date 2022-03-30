@@ -12,7 +12,7 @@ import pages.*;
 import utils.AmazonConstants;
 
 public class AmazonTestSuite {
-    private AmazonHomePage amazonHomePage;
+/*    private AmazonHomePage amazonHomePage;
     private AmazonProductPage amazonProductPage;
     private AmazonCartPage amazonCartPage;
     private AmazonSearchResultPage amazonSearchResultPage;
@@ -75,5 +75,5 @@ public class AmazonTestSuite {
     @AfterTest
     public void teardown() {
         driver.quit();
-    }
+    }*/
 }
