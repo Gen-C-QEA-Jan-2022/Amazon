@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = {"classpath:features/Amazon.feature"},
-        glue = {"cucumber/stepdefs"})
+        glue = {"cucumber"})
 
 public class RunCucumberTest {
 }
