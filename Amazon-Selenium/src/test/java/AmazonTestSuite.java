@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 import pages.*;
+import utils.AmazonConstants;
 
 public class AmazonTestSuite {
     private AmazonHomePage amazonHomePage;
@@ -16,12 +17,6 @@ public class AmazonTestSuite {
     private AmazonCartPage amazonCartPage;
     private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
-
-    // Specific product variables:
-    private String searchItem = "Cucumber Testing";
-    private String book = "The Cucumber Book: Behaviour-Driven Development for Testers and Developers";
-    private String isbn = "978-1680502381";
-    private String bookURL = "/Cucumber-Book-Behaviour-Driven-Development-Developers-dp-1680502387/dp/1680502387/";
 
     @BeforeTest
     public void setup() {
@@ -33,21 +28,21 @@ public class AmazonTestSuite {
     @Test
     public void amazon_Search_Function_Retrieves_Correct_Product() {
         amazonHomePage = new AmazonHomePage(driver);
-        amazonHomePage.useSearchBox(searchItem);
-        Assert.assertTrue(driver.getPageSource().contains(book));
+        amazonHomePage.useSearchBox(AmazonConstants.SEARCH_ITEM);
+        Assert.assertTrue(driver.getPageSource().contains(AmazonConstants.BOOK_NAME));
     }
 
     @Test(dependsOnMethods = "amazon_Search_Function_Retrieves_Correct_Product")
     public void amazon_Search_Results_Provide_Correct_Product_Page() {
         amazonSearchResultPage = new AmazonSearchResultPage(driver);
-        amazonSearchResultPage.clickImage();
-        Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), book);
+        amazonSearchResultPage.clickImage(AmazonConstants.BOOK_NAME);
+        Assert.assertEquals(driver.findElement(By.id("productTitle")).getText(), AmazonConstants.BOOK_NAME);
     }
 
     @Test(dependsOnMethods = "amazon_Search_Results_Provide_Correct_Product_Page")
     public void amazon_Product_Page_Lands_On_Paperback_Tab() {
         amazonProductPage = new AmazonProductPage(driver);
-        Assert.assertEquals(amazonProductPage.checkPaperBackTab(bookURL), "true");
+        Assert.assertEquals(amazonProductPage.checkPaperBackTab(AmazonConstants.BOOK_URL), "true");
     }
 
     @Test(dependsOnMethods = "amazon_Product_Page_Lands_On_Paperback_Tab")
@@ -61,7 +56,7 @@ public class AmazonTestSuite {
         amazonProductPage.getCart().click();
 
         amazonCartPage = new AmazonCartPage(driver);
-        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), "$32.56");
+        Assert.assertEquals(amazonCartPage.getSubtotal().getText(), AmazonConstants.BOOK_PRICE);
     }
 
     @Test(dependsOnMethods = "amazon_Cart_Page_Contains_Correct_Product_Information")
@@ -74,7 +69,7 @@ public class AmazonTestSuite {
     public void amazon_Cart_Page_Deletion_Link_Provides_Correct_Product_Page() {
         driver.get(amazonCartPage.getDeleteMessageURL());
         amazonProductPage.setDriver(driver);
-        Assert.assertEquals(amazonProductPage.getISBN(), isbn);
+        Assert.assertEquals(amazonProductPage.getISBN(), AmazonConstants.ISBN_NUM);
     }
 
     @AfterTest

@@ -3,14 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.AmazonConstants;
 
 public class AmazonHomePage {
-    private final String url = "https://www.amazon.com/";
     private WebDriver driver;
 
     public AmazonHomePage(WebDriver driver) {
         this.driver = driver;
-        driver.get(url);
+        this.driver.get(AmazonConstants.URL);
     }
 
     public WebElement getSearchBox() {

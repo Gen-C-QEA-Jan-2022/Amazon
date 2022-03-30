@@ -11,7 +11,6 @@ public class AmazonProductPage {
         this.driver = driver;
     }
 
-
     public WebElement getPaperBack(String url) {
         return driver.findElement(By.cssSelector("a[href*='" + url + "']"));
     }

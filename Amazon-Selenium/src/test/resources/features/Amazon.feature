@@ -1,7 +1,7 @@
 Feature: Amazon Search and Product Testing
   Scenario: Home Page
     Given I am on the Amazon home page amazon.com
-    When I search for “Cucumber Testing”,
+    When I search for "Cucumber Testing"
     Then I should get a result for “The Cucumber Book: Behaviour-Driven Development for Testers and Developers”
 
   Scenario: Verify Search Result/Product Page produces correct information
@@ -17,7 +17,7 @@ Feature: Amazon Search and Product Testing
   Scenario: Verify Cart Page contains correct information
     Given I have performed the above actions
     When I click on the anonymous shopping cart,
-    Then I should see the book listed with a subtotal of $32.40
+    Then I should see the book listed with a subtotal of $35.15
 
   Scenario: Verify Cart Page Delete functionality
     Given I am on the above page
