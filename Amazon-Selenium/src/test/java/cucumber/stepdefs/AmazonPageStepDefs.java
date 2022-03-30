@@ -30,7 +30,7 @@ public class AmazonPageStepDefs {
     public void start_browser() {
 //        WebDriverManager.firefoxdriver().setup();
 //        driver = new FirefoxDriver();
-        driver = WebDriverManager.firefoxdriver().create();
+        driver = WebDriverManager.chromedriver().create();
         driver.manage().timeouts().implicitlyWait(20, java.util.concurrent.TimeUnit.SECONDS);
     }
 
