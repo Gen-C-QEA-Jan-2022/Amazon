@@ -24,6 +24,7 @@ public class AmazonPageStepDefs {
     private AmazonSearchResultPage amazonSearchResultPage;
     private WebDriver driver;
 
+    // Set web driver:
     @Before
     public void start_browser() {
         WebDriverManager.chromedriver().setup();

@@ -10,5 +10,4 @@ import org.junit.runner.RunWith;
         glue = {"cucumber/stepdefs"})
 
 public class RunCucumberTest {
-
 }

@@ -1,0 +1,5 @@
+pages\AmazonCartPage.class
+pages\AmazonProductPage.class
+pages\AmazonHomePage.class
+pages\AmazonSearchResultPage.class
+utils\AmazonConstants.class

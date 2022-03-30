@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Amazon" />
         <module name="Selenium-Amazon-Tests" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="17">
-      <module name="Selenium-Amazon-Tests" target="8" />
+      <module name="Amazon" target="1.8" />
+      <module name="Selenium-Amazon-Tests" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

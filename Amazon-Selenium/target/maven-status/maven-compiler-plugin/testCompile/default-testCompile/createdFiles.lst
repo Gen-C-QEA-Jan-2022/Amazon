@@ -1,0 +1,3 @@
+AmazonTestSuite.class
+cucumber\RunCucumberTest.class
+cucumber\stepdefs\AmazonPageStepDefs.class
