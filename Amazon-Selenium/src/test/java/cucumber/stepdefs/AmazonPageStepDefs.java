@@ -34,7 +34,7 @@ public class AmazonPageStepDefs {
 
     @After
     public void close_browser() {
-        driver.close();
+        driver.quit();
     }
 
     // Home Page:
