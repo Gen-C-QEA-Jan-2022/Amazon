@@ -5,8 +5,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building...'
-        sh 'cd Amazon-Selenium'
-        sh 'mvn clean package -DskipTests'
+        sh 'mvn -f Amazon-Selenium/pom.xml clean package -DskipTests'
         archiveArtifacts artifacts: '**/target/*.jar'
       }
     }
