@@ -1,10 +1,10 @@
 package cucumber.stepdefs;
 
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -39,7 +39,7 @@ public class AmazonPageStepDefs {
 
     // Home Page:
     @Given("I am on the Amazon home page amazon.com")
-    public void i_am_on_the_Amazon_home_page_amazon_com() {
+    public void i_am_on_the_Amazon_home_page() {
         amazonHomePage = new AmazonHomePage(driver);
     }
 
@@ -49,7 +49,7 @@ public class AmazonPageStepDefs {
     }
 
     @Then("I should get a result for “The Cucumber Book: Behaviour-Driven Development for Testers and Developers”")
-    public void i_should_get_a_result_for_The_Cucumber_Book_Behaviour_Driven_Development_for_Testers_and_Developers() {
+    public void i_should_get_a_result_for_The_Cucumber_Book() {
         Assert.assertTrue(driver.getPageSource().contains(AmazonConstants.BOOK_NAME));
     }
 
@@ -88,7 +88,7 @@ public class AmazonPageStepDefs {
     }
 
     @Then("the anonymous shopping cart should have {int} item in it.")
-    public void the_anonymous_shopping_cart_should_have_item_in_it(Integer quantity) {
+    public void the_anonymous_shopping_cart_should_have_item(Integer quantity) {
         Assert.assertEquals(amazonProductPage.getCartQty().getText(), String.valueOf(quantity));
     }
 
@@ -145,7 +145,7 @@ public class AmazonPageStepDefs {
     }
 
     @Then("I should see an ISBN-13 number of {int}-{int}")
-    public void i_should_see_an_ISBN_number_of(Integer int1, Integer int2) {
+    public void i_should_see_an_ISBN_number(Integer int1, Integer int2) {
         amazonProductPage.setDriver(driver);
         Assert.assertEquals(amazonProductPage.getISBN(), int1 + "-" + int2);
     }
