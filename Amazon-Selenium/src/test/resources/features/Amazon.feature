@@ -17,7 +17,7 @@ Feature: Amazon Search and Product Testing
   Scenario: Verify Cart Page contains correct information
     Given I have performed the above actions
     When I click on the anonymous shopping cart,
-    Then I should see the book listed with a subtotal of $35.15
+    Then I should see the book listed with a subtotal of $39.15
 
   Scenario: Verify Cart Page Delete functionality
     Given I am on the above page
